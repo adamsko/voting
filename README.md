@@ -14,6 +14,6 @@
 
 * To post a question into the application:
 
-	curl -H "Content-Type: application/json" -X POST -d '{"text":"What kind of monster are you?"}' http://localhost:8080/questions
+	    curl -H "Content-Type: application/json" -X POST -d '{"text":"What kind of monster are you?"}' http://localhost:8080/questions
 
-	open http://localhost:8080/questions
+	    open http://localhost:8080/questions

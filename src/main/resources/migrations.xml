@@ -15,5 +15,14 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <createTable tableName="votes">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="questionId" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>

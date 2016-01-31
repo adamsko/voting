@@ -1,7 +1,9 @@
 package com.askog.voting;
 
 import com.askog.voting.db.QuestionDao;
+import com.askog.voting.db.VoteDao;
 import com.askog.voting.entity.Question;
+import com.askog.voting.entity.Vote;
 import com.askog.voting.resources.QuestionsResource;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
@@ -19,7 +21,7 @@ public class VotingApplication extends Application<VotingConfiguration> {
     }
 
     private final HibernateBundle<VotingConfiguration> hibernateBundle =
-            new HibernateBundle<VotingConfiguration>(Question.class) {
+            new HibernateBundle<VotingConfiguration>(Question.class, Vote.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(VotingConfiguration configuration) {
                     return configuration.getDataSourceFactory();
@@ -54,7 +56,8 @@ public class VotingApplication extends Application<VotingConfiguration> {
     @Override
     public void run(VotingConfiguration votingConfiguration, Environment environment) throws Exception {
         final QuestionDao questionDao = new QuestionDao(hibernateBundle.getSessionFactory());
+        final VoteDao voteDao = new VoteDao(hibernateBundle.getSessionFactory());
 
-        environment.jersey().register(new QuestionsResource(questionDao));
+        environment.jersey().register(new QuestionsResource(questionDao, voteDao));
     }
 }

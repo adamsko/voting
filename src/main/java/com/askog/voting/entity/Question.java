@@ -25,6 +25,10 @@ public class Question {
         this.text = text;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getText() {
         return text;
     }
